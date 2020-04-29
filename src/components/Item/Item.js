@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import Grid from '@material-ui/core/Grid';
 
 import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -19,8 +20,7 @@ import ToCartModal from "../../containers/Modal/ToCartModal";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: '48%',
-        marginBottom: 30
+
     },
     media: {
         height: 0,
@@ -60,6 +60,7 @@ const Item = (props) => {
                 className={classes.media}
                 image={props.img}
             />
+
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
                     {props.description}
@@ -70,6 +71,10 @@ const Item = (props) => {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
+                <Grid container
+                    direction="row"
+                    justify="space-between"
+                    alignItems="center">
                 <IconButton aria-label="add to favorites">
                     <FavoriteIcon/>
                 </IconButton>
@@ -80,6 +85,7 @@ const Item = (props) => {
                             Unavailable Now
                         </Typography>
                 }
+                </Grid>
             </CardActions>
         </Card>
     );

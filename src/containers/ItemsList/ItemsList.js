@@ -5,9 +5,6 @@ import {connect} from 'react-redux'
 import * as actionCreator from "../../store/actions/actions";
 import Grid from '@material-ui/core/Grid';
 
-
-
-
 class ItemsList extends Component {
 
     componentDidMount() {
@@ -16,11 +13,17 @@ class ItemsList extends Component {
 
     render() {
         return (
-            <Grid>
-
+            <Grid
+                container
+                spacing={3}
+                direction="row"
+                justify="flex-start"
+                alignItems="center"
+            >
                 {
                     this.props.isLoaded ?
                     this.props.itms.map(item =>
+                        <Grid item xs={4}>
                         <Item
                             title={item.title}
                             date={item.date}
@@ -30,7 +33,7 @@ class ItemsList extends Component {
                             index={item.id}
                             description={item.description}
                             img={item.img}
-                        />) :
+                        /></Grid>) :
                     <CircularProgress/>
                 }
 

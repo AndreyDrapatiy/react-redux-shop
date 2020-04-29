@@ -8,18 +8,12 @@ import ItemsList from "./containers/ItemsList/ItemsList";
 
 import SingleItem from "./containers/SingleItem/SingleItem";
 
-import Modal from "./containers/Modal/ToCartModal";
-
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import Container from '@material-ui/core/Container';
 import {makeStyles} from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
     root: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
         marginTop: '60px',
     },
 });
@@ -32,9 +26,10 @@ function App() {
     return (
 
             <Router>
+
                 <Bar/>
 
-                <Container maxWidth="md" className={classes.root}>
+                <Container maxWidth={'lg'}  className={classes.root}>
 
                     <Route exact path={ROUTES.HOME} component={ItemsList}/>
 

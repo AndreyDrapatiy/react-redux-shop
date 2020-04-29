@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2, 4, 3),
     },
     media: {
-
         height: 0,
         paddingTop: '56.25%', // 16:9
     },
@@ -97,8 +96,7 @@ const ToCartModal = (props) => {
                         <IconButton aria-label="add to favorites" onClick={inc}><AddIcon/></IconButton>
                     </Grid>
                     <Grid item container xs={4} direction="row" justify="flex-end">
-                        <Button size="small" color="primary" onClick={() => props.addToCart(computedData())}> Add<ShoppingCartIcon/>
-                        </Button>
+                        <Button size="large" color="secondary" onClick={() => props.addToCart(computedData())}>add <ShoppingCartIcon/></Button>
                     </Grid>
                 </Grid>
 
@@ -108,9 +106,7 @@ const ToCartModal = (props) => {
 
     return (
         <div>
-            <Button size="small" color="primary" onClick={handleOpen}>Add to
-                cart<ShoppingCartIcon/>
-            </Button>
+            <Button size="medium" color="secondary" onClick={handleOpen}>Add To Cart</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
