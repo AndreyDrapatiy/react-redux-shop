@@ -59,7 +59,7 @@ const ToCartModal = (props) => {
     };
 
     const computedData = () => {
-        return {...props.item, ...{quantity:quantity}}
+        return {...props.item, ...{quantity:quantity}, ...{inCart: true}}
     };
 
     const handleOpen = () => {
@@ -68,6 +68,12 @@ const ToCartModal = (props) => {
 
     const handleClose = () => {
         setOpen(false);
+    };
+
+    const addBtnHandler = () => {
+        props.addToCart(computedData());
+        // props.setInCartState(1)
+        handleClose();
     };
 
     const body = (
@@ -96,7 +102,7 @@ const ToCartModal = (props) => {
                         <IconButton aria-label="add to favorites" onClick={inc}><AddIcon/></IconButton>
                     </Grid>
                     <Grid item container xs={4} direction="row" justify="flex-end">
-                        <Button size="large" color="secondary" onClick={() => props.addToCart(computedData())}>add <ShoppingCartIcon/></Button>
+                        <Button size="large" color="secondary" onClick={() => addBtnHandler()}>add <ShoppingCartIcon/></Button>
                     </Grid>
                 </Grid>
 
@@ -122,7 +128,8 @@ const ToCartModal = (props) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addToCart: (item) => dispatch(actionCreator.add_to_cart(item))
+        addToCart: (item) => dispatch(actionCreator.add_to_cart(item)),
+        // setInCartState: (id) => dispatch(actionCreator.set_in_cart_state(id))
     }
 };
 

@@ -14,11 +14,9 @@ import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
     root: {
-        marginTop: '60px',
+        marginTop: '120px',
     },
 });
-
-
 
 function App() {
     const classes = useStyles();

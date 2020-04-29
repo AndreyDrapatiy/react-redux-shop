@@ -1,11 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Badge from '@material-ui/core/Badge';
+import {connect} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,21 +21,41 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
 }));
+const mapStateToProps = state => {
+    return {
+        cartLength: state.cart.length
+    }
+};
 
-export default function () {
+const Bar = () => {
     const classes = useStyles();
 
-    return(
+    return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="fixed">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
+                        <MenuIcon/>
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
                         Own_Project
                     </Typography>
-                    <Button color="inherit">Login</Button>
+
+                    <Button
+                        size={"small"}
+                        variant="outlined"
+                        color="inherit"
+                        className={classes.button}
+                        endIcon={
+                            <Badge badgeContent={()=> props.cartLength} color="secondary">
+                                <ShoppingCartIcon/>
+                            </Badge>
+                        }
+                    >
+                        Cart
+                    </Button>
+
+                    {/*<Button color="inherit">Login</Button>*/}
                 </Toolbar>
             </AppBar>
         </div>
@@ -41,6 +64,7 @@ export default function () {
 
 
 
+export default connect(mapStateToProps)(Bar)
 
 
 

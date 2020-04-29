@@ -36,6 +36,14 @@ const reducer = (state = initialState, action) => {
                 cart: state.cart.concat({...state.item, ...action.result})
             }
         }
+
+        // case actionTypes.SET_IN_CART_STATE: {
+        //     return {
+        //         ...state,
+        //         items: [ ...state.items, {...state.items[action.result], ...{inCart: true}}]
+        //
+        //     }
+        // }
     }
     return state;
 };

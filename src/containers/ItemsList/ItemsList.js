@@ -22,17 +22,18 @@ class ItemsList extends Component {
             >
                 {
                     this.props.isLoaded ?
-                    this.props.itms.map(item =>
-                        <Grid item xs={4}>
+                    this.props.itms.map((item, index) =>
+                        <Grid key={index} item xs={4}>
                         <Item
                             title={item.title}
                             date={item.date}
                             available={item.available}
                             price={item.price}
-                            key={item.id}
+                            key={index}
                             index={item.id}
                             description={item.description}
                             img={item.img}
+
                         /></Grid>) :
                     <CircularProgress/>
                 }
@@ -42,9 +43,6 @@ class ItemsList extends Component {
         );
     }
 }
-
-
-
 
 const mapStateToProps = state => {
     return {

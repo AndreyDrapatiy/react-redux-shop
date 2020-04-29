@@ -4,6 +4,7 @@ import instance from "../../axios";
 export const LOAD_ITEMS = 'LOAD_ITEMS';
 export const LOAD_SINGLE = 'LOAD_SINGLE';
 export const ADD_TO_CART = 'ADD_TO_CART';
+export const SET_IN_CART_STATE = 'SET_IN_CART_STATE';
 export const IS_LOADED = 'IS_LOADED';
 export const FAIL_LOAD = 'FAIL_LOAD';
 
@@ -48,3 +49,10 @@ export const add_to_cart = (item) => {
         result: item
     }
 };
+
+// export const set_in_cart_state = (id) => {
+//     return{
+//         type: SET_IN_CART_STATE,
+//         result: id
+//     }
+// };

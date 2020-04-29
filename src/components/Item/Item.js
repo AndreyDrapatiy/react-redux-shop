@@ -17,7 +17,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 import ToCartModal from "../../containers/Modal/ToCartModal";
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
 
@@ -44,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Item = (props) => {
     const classes = useStyles();
-
     return (
 
         <Card className={classes.root}>
@@ -86,6 +84,7 @@ const Item = (props) => {
                         </Typography>
                 }
                 </Grid>
+
             </CardActions>
         </Card>
     );
