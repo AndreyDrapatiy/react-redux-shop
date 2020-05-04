@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions/actions';
+import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     items: null,
@@ -37,13 +37,11 @@ const reducer = (state = initialState, action) => {
             }
         }
 
-        // case actionTypes.SET_IN_CART_STATE: {
-        //     return {
-        //         ...state,
-        //         items: [ ...state.items, {...state.items[action.result], ...{inCart: true}}]
-        //
-        //     }
-        // }
+        case actionTypes.GET_CART_ITEMS: {
+            return {
+                cartItems: state.cart
+            }
+        }
     }
     return state;
 };

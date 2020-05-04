@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Badge from '@material-ui/core/Badge';
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,13 +22,8 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
 }));
-const mapStateToProps = state => {
-    return {
-        cartLength: state.cart.length
-    }
-};
 
-const Bar = () => {
+const Bar = (props) => {
     const classes = useStyles();
 
     return (
@@ -41,19 +37,22 @@ const Bar = () => {
                         Own_Project
                     </Typography>
 
-                    <Button
-                        size={"small"}
-                        variant="outlined"
-                        color="inherit"
-                        className={classes.button}
-                        endIcon={
-                            <Badge badgeContent={()=> props.cartLength} color="secondary">
-                                <ShoppingCartIcon/>
-                            </Badge>
-                        }
-                    >
-                        Cart
-                    </Button>
+                    <Link to={'/cart'}>
+                        <Button
+                            size={"small"}
+                            variant="outlined"
+                            color="inherit"
+                            className={classes.button}
+                            endIcon={
+                                <Badge badgeContent={props.cartLength} color="secondary">
+                                    <ShoppingCartIcon/>
+                                </Badge>
+                            }
+                        >
+                            Cart
+                        </Button>
+                    </Link>
+
 
                     {/*<Button color="inherit">Login</Button>*/}
                 </Toolbar>
@@ -62,7 +61,11 @@ const Bar = () => {
     )
 };
 
-
+const mapStateToProps = state => {
+    return {
+        cartLength: state.cart.length
+    }
+};
 
 export default connect(mapStateToProps)(Bar)
 

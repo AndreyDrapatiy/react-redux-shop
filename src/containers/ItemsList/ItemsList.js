@@ -2,16 +2,17 @@ import React, {Component} from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Item from '../../components/Item/Item'
 import {connect} from 'react-redux'
-import * as actionCreator from "../../store/actions/actions";
+import * as actions from "../../store/actions/";
 import Grid from '@material-ui/core/Grid';
 
 class ItemsList extends Component {
 
-    componentDidMount() {
-        this.props.loadItems()
+    componentWillMount() {
+        this.props.loadItems();
     }
 
     render() {
+
         return (
             <Grid
                 container
@@ -22,7 +23,7 @@ class ItemsList extends Component {
             >
                 {
                     this.props.isLoaded ?
-                    this.props.itms.map((item, index) =>
+                    this.props.loadedItems.map((item, index) =>
                         <Grid key={index} item xs={4}>
                         <Item
                             title={item.title}
@@ -38,7 +39,6 @@ class ItemsList extends Component {
                     <CircularProgress/>
                 }
 
-                <h1>{this.props.loadFailed}</h1>
             </Grid>
         );
     }
@@ -46,15 +46,14 @@ class ItemsList extends Component {
 
 const mapStateToProps = state => {
     return {
-        itms: state.items,
+        loadedItems: state.items,
         isLoaded: state.isLoaded,
-        loadFailed: state.failedLoad
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        loadItems: () => dispatch(actionCreator.load_items()),
+        loadItems: () => dispatch(actions.load_items()),
     }
 };
 

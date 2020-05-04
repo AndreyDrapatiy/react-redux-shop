@@ -9,7 +9,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Grid from '@material-ui/core/Grid';
-import * as actionCreator from "../../store/actions/actions";
+import * as actions from "../../store/actions/";
 import {connect} from "react-redux";
 
 function rand() {
@@ -128,7 +128,7 @@ const ToCartModal = (props) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addToCart: (item) => dispatch(actionCreator.add_to_cart(item)),
+        addToCart: (item) => dispatch(actions.add_to_cart(item)),
         // setInCartState: (id) => dispatch(actionCreator.set_in_cart_state(id))
     }
 };
