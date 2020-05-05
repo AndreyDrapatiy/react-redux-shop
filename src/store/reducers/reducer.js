@@ -5,11 +5,48 @@ const initialState = {
     single: null,
     isLoaded: false,
     failLoad: false,
-    cart: []
+    cart: [],
+    user: {
+        token: null,
+        userId: null,
+        error: null,
+        loading: false
+    }
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+
+        case actionTypes.AUTH_START: {
+            return {
+                ...state,
+                user: {...{ error: null, loading: true}}
+            }
+        }
+
+        case actionTypes.AUTH_SUCCESS: {
+            return {
+                ...state,
+                user: {...{token: action.authData.idToken, userId: action.authData.localId, error: null, loading: false}}
+            }
+        }
+
+        case actionTypes.AUTH_FAIL: {
+            return {
+                ...state,
+                user: {...{error: action.error, loading: false, userId: null}
+                }
+            }
+        }
+
+        case actionTypes.AUTH_LOGOUT: {
+            return {
+                ...state,
+                user: {...{token: null, userId: null}
+                }
+            }
+        }
+
         case actionTypes.LOAD_ITEMS: {
             return {
                 ...state,

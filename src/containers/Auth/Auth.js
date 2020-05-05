@@ -36,6 +36,10 @@ const Auth = (props) => {
         setIsSignUp(!isSignUp)
     }
 
+    const redirectToMain = () => {
+        console.log('push')
+    }
+
     return (
         <form onSubmit={submitHandler}>
             <Grid container direction="column"
@@ -53,6 +57,11 @@ const Auth = (props) => {
                 <Grid container item xs={4}>
                     <TextField fullWidth id="password" type="password" onChange={passwordHandler} label="Password"/>
                 </Grid>
+                <Grid container justify="flex-start" item xs={4}>
+                    <Typography  color="textSecondary" component="p">
+                        {props.authError}
+                    </Typography>
+                </Grid>
                 <Grid container justify="space-between" item xs={4}>
                     <Button variant="outlined" color="primary" onClick={switchAuthMode}>Switch to {isSignUp ? 'sign in' : 'sign up'}</Button>
                     <Button variant="contained" type="submit" disabled={false} color="primary">
@@ -64,6 +73,12 @@ const Auth = (props) => {
     );
 }
 
+const mapStateToProps = state => {
+    return {
+        authError: state.user.error,
+        isAuthSuccess: state.user.userId
+    }
+}
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -71,4 +86,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

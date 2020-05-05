@@ -37,6 +37,7 @@ function App() {
                         <Route path={ROUTES.AUTH} component={Auth}/>
                         <Route path={ROUTES.SINGLE} component={SingleItem}/>
                         <Route path={ROUTES.CART} component={Cart}/>
+                        <Route path={ROUTES.AUTH} component={Auth}/>
                     </Switch>
 
                 </Container>
