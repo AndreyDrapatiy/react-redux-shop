@@ -59,7 +59,8 @@ const ToCartModal = (props) => {
     };
 
     const computedData = () => {
-        return {...props.item, ...{quantity:quantity}, ...{inCart: true}}
+        let data = [quantity, props.item.id]
+        return data;
     };
 
     const handleOpen = () => {
@@ -71,8 +72,7 @@ const ToCartModal = (props) => {
     };
 
     const addBtnHandler = () => {
-        props.addToCart(computedData());
-        // props.setInCartState(1)
+        props.addToCart(props.userToken, props.userId, props.userCart, computedData());
         handleClose();
     };
 
@@ -125,12 +125,17 @@ const ToCartModal = (props) => {
     );
 };
 
-
+const mapStateToProps = state => {
+    return {
+        userId: state.user.userId,
+        userToken: state.user.token,
+        userCart: state.cart
+    }
+}
 const mapDispatchToProps = dispatch => {
     return {
-        addToCart: (item) => dispatch(actions.add_to_cart(item)),
-        // setInCartState: (id) => dispatch(actionCreator.set_in_cart_state(id))
+        addToCart: (token, userId, cart, currentItem) => dispatch(actions.add_to_cart(token, userId, cart, currentItem))
     }
 };
 
-export default connect(null, mapDispatchToProps)(ToCartModal)
+export default connect(mapStateToProps, mapDispatchToProps)(ToCartModal)

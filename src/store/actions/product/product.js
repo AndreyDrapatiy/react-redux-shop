@@ -1,5 +1,5 @@
 import * as actionTypes from '../actionTypes';
-import instance from '../../../axios'
+import axios from "../../../axios";
 
 export const is_loaded = (res) => {
     return {
@@ -24,7 +24,7 @@ export const save_loaded_items = (res) => {
 
 export const load_items = () => {
     return dispatch => {
-        instance.get('/data.json')
+        axios.get('/data.json')
             .then(response => {
                 dispatch(save_loaded_items(response.data));
                 dispatch(is_loaded(true))

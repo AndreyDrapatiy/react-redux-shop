@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
-import Card from "@material-ui/core/Card";
+import { Redirect } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import Grid from "@material-ui/core/Grid";
 import { connect } from 'react-redux';
@@ -15,7 +15,7 @@ const Auth = (props) => {
         isValidPass: false
     });
 
-    const [isSignUp, setIsSignUp] = useState(true)
+    const [isSignIn, setIsSignIn] = useState(true)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -29,15 +29,11 @@ const Auth = (props) => {
 
     const submitHandler = (event) => {
         event.preventDefault();
-        props.onAuth(email, password, isSignUp)
+        props.onAuth(email, password, isSignIn)
     }
 
     const switchAuthMode = () => {
-        setIsSignUp(!isSignUp)
-    }
-
-    const redirectToMain = () => {
-        console.log('push')
+        setIsSignIn(!isSignIn)
     }
 
     return (
@@ -48,7 +44,7 @@ const Auth = (props) => {
                   spacing={4}>
                 <Grid container justify="flex-start" item xs={4}>
                     <Typography variant="h5" color="textPrimary" component="h3">
-                        {isSignUp ? 'Sign Up' : 'Sign In'}
+                        {isSignIn ? 'Sign In' : 'Sign Up'}
                     </Typography>
                 </Grid>
                 <Grid container item xs={4}>
@@ -63,11 +59,14 @@ const Auth = (props) => {
                     </Typography>
                 </Grid>
                 <Grid container justify="space-between" item xs={4}>
-                    <Button variant="outlined" color="primary" onClick={switchAuthMode}>Switch to {isSignUp ? 'sign in' : 'sign up'}</Button>
+                    <Button variant="outlined" color="primary" onClick={switchAuthMode}>Switch to {isSignIn ? 'sign up' : 'sign in'}</Button>
                     <Button variant="contained" type="submit" disabled={false} color="primary">
                         Submit
                     </Button>
                 </Grid>
+
+                {props.isAuthSuccess !== null && !props.isLoading  ? <Redirect to='/' /> : null}
+
             </Grid>
         </form>
     );
@@ -76,13 +75,14 @@ const Auth = (props) => {
 const mapStateToProps = state => {
     return {
         authError: state.user.error,
-        isAuthSuccess: state.user.userId
+        isAuthSuccess: state.user.userId,
+        isLoading: state.user.loading
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp))
+        onAuth: (email, password, isSignIn) => dispatch(actions.auth(email, password, isSignIn)),
     }
 }
 

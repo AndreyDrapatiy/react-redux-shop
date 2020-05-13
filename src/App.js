@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react';
+import React, {useEffect} from 'react';
 
 import * as ROUTES from './router/routes';
 
@@ -7,9 +7,10 @@ import Bar from './components/Bar/Bar'
 import ItemsList from "./containers/ItemsList/ItemsList";
 import Auth from "./containers/Auth/Auth";
 
-import SingleItem from "./containers/SingleItem/SingleItem";
+import { connect, useDispatch } from 'react-redux'
+import * as actions from "../src/store/actions/";
 
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Container from '@material-ui/core/Container';
 import {makeStyles} from "@material-ui/core/styles";
 import Cart from "./containers/Cart/Cart";
@@ -23,6 +24,13 @@ const useStyles = makeStyles({
 function App() {
     const classes = useStyles();
 
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(actions.auth_check_state());
+            dispatch(actions.cart_check_state());
+    }, [])
+
     return (
 
             <Router>
@@ -35,9 +43,8 @@ function App() {
 
                     <Switch>
                         <Route path={ROUTES.AUTH} component={Auth}/>
-                        <Route path={ROUTES.SINGLE} component={SingleItem}/>
+                        {/*<Route path={ROUTES.SINGLE} component={SingleItem}/>*/}
                         <Route path={ROUTES.CART} component={Cart}/>
-                        <Route path={ROUTES.AUTH} component={Auth}/>
                     </Switch>
 
                 </Container>
@@ -45,4 +52,6 @@ function App() {
     );
 }
 
-export default App;
+
+
+export default connect(null, null)(App);

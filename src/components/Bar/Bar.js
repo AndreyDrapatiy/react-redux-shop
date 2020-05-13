@@ -11,6 +11,9 @@ import Badge from '@material-ui/core/Badge';
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
+import * as actions from "../../store/actions/";
+import { Redirect } from "react-router-dom"
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 const Bar = (props) => {
     const classes = useStyles();
-
     return (
         <div className={classes.root}>
             <AppBar position="fixed">
@@ -38,10 +41,7 @@ const Bar = (props) => {
                         Own_Project
                     </Typography>
 
-
-
                     {props.isAuth ?
-
 
                         <Grid container justify="space-between" item xs={2}>
 
@@ -61,14 +61,16 @@ const Bar = (props) => {
                                 </Button>
                             </Link>
 
-                             <Button color="inherit">Logout</Button>
+                             <Button color="inherit" onClick={props.onLogout}>Logout</Button>
 
                         </Grid>
                         :
                         <Link to={'/auth'}>
-                            <Button color="inherit">Login</Button>
+                            <Button color="inherit">Authenticate</Button>
                         </Link>
                     }
+
+                    {props.isAuth !== null ? <Redirect to="/" /> : null}
 
                 </Toolbar>
             </AppBar>
@@ -83,7 +85,13 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps)(Bar)
+const mapDispatchToProps = dispatch => {
+    return{
+        onLogout: () => dispatch(actions.logout())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Bar)
 
 
 

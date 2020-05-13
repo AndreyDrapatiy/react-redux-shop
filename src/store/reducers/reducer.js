@@ -6,6 +6,7 @@ const initialState = {
     isLoaded: false,
     failLoad: false,
     cart: [],
+    cartIds:[],
     user: {
         token: null,
         userId: null,
@@ -27,7 +28,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.AUTH_SUCCESS: {
             return {
                 ...state,
-                user: {...{token: action.authData.idToken, userId: action.authData.localId, error: null, loading: false}}
+                user: {...{token: action.idToken, userId: action.userId, error: null, loading: false}}
             }
         }
 
@@ -42,8 +43,9 @@ const reducer = (state = initialState, action) => {
         case actionTypes.AUTH_LOGOUT: {
             return {
                 ...state,
-                user: {...{token: null, userId: null}
-                }
+                user: {...{token: null, userId: null}},
+                cart: [],
+                cartIds: []
             }
         }
 
@@ -67,10 +69,17 @@ const reducer = (state = initialState, action) => {
             }
         }
 
-        case actionTypes.ADD_TO_CART: {
+        case actionTypes.UPDATE_CART: {
             return {
                 ...state,
-                cart: state.cart.concat({...state.item, ...action.result})
+                cart: action.result
+            }
+        }
+
+        case actionTypes.UPDATE_CART_IDS: {
+            return {
+                ...state,
+                cartIds: action.result
             }
         }
 
@@ -79,6 +88,9 @@ const reducer = (state = initialState, action) => {
                 cartItems: state.cart
             }
         }
+        default:
+            break;
+
     }
     return state;
 };

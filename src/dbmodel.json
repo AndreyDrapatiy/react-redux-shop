@@ -1,0 +1,48 @@
+{
+  "data": [
+    {
+      "id": "1588924048299",
+      "available": true,
+      "categorySlug": "qq",
+      "date": "11.02.2019",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "img": "https://wallpapersmug.com/large/c6b737/santorini-houses.jpg",
+      "price": "421.30",
+      "title": "Delectus aut autem"
+    },
+    {
+      "id": "1588924343516",
+      "available": true,
+      "categorySlug": "ss",
+      "date": "12.04.2020",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "img": "https://wallpapersmug.com/large/beb123/holiady-cookies.jpg",
+      "price": "511.99",
+      "title": "Delectus aut autem"
+    },
+    {
+      "id": "1588924374230",
+      "available": false,
+      "categorySlug": "aa",
+      "date": "31.01.2020",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "img": "https://wallpapersmug.com/large/95ddb8/cyber-outrun-vaporwave-art.jpg",
+      "price": "1421.50",
+      "title": "Delectus aut autem"
+    },
+    {
+      "id": "1588924506800",
+      "available": true,
+      "categorySlug": "ss",
+      "date": "07.07.2020",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "img": "https://wallpapersmug.com/large/213d4a/black-tea-cup.jpg",
+      "price": "99.90",
+      "title": "Delectus aut autem"
+    }
+  ],
+  "cart": {
+
+  }
+}
+

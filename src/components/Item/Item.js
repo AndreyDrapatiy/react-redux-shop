@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 
@@ -15,12 +15,13 @@ import Typography from '@material-ui/core/Typography';
 import {red} from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
+import {connect} from 'react-redux'
+
 import ToCartModal from "../../containers/Modal/ToCartModal";
+import * as actions from "../../store/actions";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-
-    },
+    root: {},
     media: {
         height: 0,
         paddingTop: '56.25%', // 16:9
@@ -38,11 +39,37 @@ const useStyles = makeStyles((theme) => ({
     avatar: {
         backgroundColor: red[500],
     },
+    inCart: {
+        paddingRight: '8px',
+        color: '#00c853',
+    },
+    unavailable: {
+        paddingRight: '8px',
+    }
 
 }));
 
 const Item = (props) => {
     const classes = useStyles();
+
+    const checkItemStatus = () => {
+        if (props.cartIds.includes(props.id)) {
+            return (
+                <Typography variant="body1" className={classes.inCart} component="p">
+                    Already in cart
+                </Typography>
+            )
+        }
+        else return (
+            props.available ?
+                <ToCartModal item={props}/> :
+                <Typography variant="body1" className={classes.unavailable} color="textSecondary" component="p">
+                    Unavailable Now
+                </Typography>
+        )
+    }
+
+
     return (
 
         <Card className={classes.root}>
@@ -70,19 +97,13 @@ const Item = (props) => {
             </CardContent>
             <CardActions disableSpacing>
                 <Grid container
-                    direction="row"
-                    justify="space-between"
-                    alignItems="center">
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon/>
-                </IconButton>
-                {
-                    props.available ?
-                        <ToCartModal item={props}/> :
-                        <Typography variant="body1" color="textPrimary" component="p">
-                            Unavailable Now
-                        </Typography>
-                }
+                      direction="row"
+                      justify="space-between"
+                      alignItems="center">
+                    <IconButton aria-label="add to favorites">
+                        <FavoriteIcon/>
+                    </IconButton>
+                    {checkItemStatus()}
                 </Grid>
 
             </CardActions>
@@ -90,4 +111,10 @@ const Item = (props) => {
     );
 };
 
-export default Item
+const mapStateToProps = state => {
+    return {
+        cartIds: state.cartIds
+    }
+}
+
+export default connect(mapStateToProps, null)(Item)

@@ -24,14 +24,14 @@ class ItemsList extends Component {
                 {
                     this.props.isLoaded ?
                     this.props.loadedItems.map((item, index) =>
-                        <Grid key={index} item xs={4}>
+                        <Grid key={item.id} item xs={4}>
                         <Item
                             title={item.title}
                             date={item.date}
                             available={item.available}
                             price={item.price}
                             key={index}
-                            index={item.id}
+                            id={item.id}
                             description={item.description}
                             img={item.img}
 
